@@ -25,8 +25,14 @@ router.get('/:id', async (req, res) => {
 
 // POST route to add a new product
 router.post('/', (req, res, next) => {
-    const newProduct = req.body;
-    newProduct.id = db.products.length + 1;
+    const data = req.body;
+    const newProduct = {
+        id: db.products.length + 1,
+        name: data.name,
+        color: data.color,
+        amount: data.amount,
+        price: data.price
+    };
     db.products.push(newProduct);
     res.status(201).json(newProduct);
 });

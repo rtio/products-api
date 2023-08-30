@@ -11,13 +11,14 @@ function delay(time) {
 }
 
 // GET route to fetch all products
-router.get('/', async (req, res, next) => {
+router.get('/', (req, res, next) => {
+    // print all the headers and query
     // await delay(2000);
     res.json(db.products);
 });
 
 // GET route to fetch a specific product by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', (req, res) => {
     const product = db.products.find(p => p.id === Number(req.params.id));
     // await delay(2000);
     product ? res.json(product) : res.status(404).json(NotFound404);
@@ -28,10 +29,7 @@ router.post('/', (req, res, next) => {
     const data = req.body;
     const newProduct = {
         id: db.products.length + 1,
-        name: data.name,
-        color: data.color,
-        amount: data.amount,
-        price: data.price
+        ... data
     };
     db.products.push(newProduct);
     res.status(201).json(newProduct);

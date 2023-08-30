@@ -1,7 +1,7 @@
 'use strict'
 
 // faux database
-export const products = [
+exports.products = [
     {
       id: 1,
       name: 'Camiseta Básica',
